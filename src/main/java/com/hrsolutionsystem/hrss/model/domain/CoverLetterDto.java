@@ -1,11 +1,14 @@
 package com.hrsolutionsystem.hrss.model.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
 public class CoverLetterDto {
     private Long id;
     private byte[] file;
-    private Date date;
+    private final LocalDate date = LocalDate.now();
 }

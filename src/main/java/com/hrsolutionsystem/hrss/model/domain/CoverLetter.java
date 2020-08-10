@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,12 @@ import java.util.Date;
 public class CoverLetter {
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Long id;
+
+    @Column(name = "FILE", nullable = false)
     private byte[] file;
-    private Date date;
+
+    @Column(name = "DATE")
+    private LocalDate date;
 }
