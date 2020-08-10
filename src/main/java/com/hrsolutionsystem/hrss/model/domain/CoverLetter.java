@@ -18,9 +18,16 @@ public class CoverLetter {
     @Column(name = "ID")
     private Long id;
 
+    @Lob
     @Column(name = "FILE", nullable = false)
     private byte[] file;
 
+    @Column(name = "FILE_NAME", nullable = false)
+    private String fileName;
+
+    @Column(name = "FILE_TYPE", nullable = false)
+    private String fileType;
+
     @Column(name = "DATE")
-    private LocalDate date;
+    private final LocalDate date = LocalDate.now();
 }
