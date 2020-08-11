@@ -18,6 +18,12 @@ public class Recruiters {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name="LOGIN")
+    private String login;
+
+    @Column(name = "PASSWORD")
+    private String password;
+
     @Column(name = "FIRST_NAME")
     private String firstName;
 
@@ -34,7 +40,7 @@ public class Recruiters {
     private long companiesId;
 
     @Column(name = "CV_DETAILS_ID")
-    private long cvDetailsIdl;
+    private long cvDetailsId;
 
     @Column(name = "INTERVIEWS_ID")
     private long interviewsId;
