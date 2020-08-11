@@ -2,8 +2,8 @@ package com.hrsolutionsystem.hrss.model.service;
 
 import com.hrsolutionsystem.hrss.exception.wantedEmployee.WantedEmployeeNotFoundException;
 import com.hrsolutionsystem.hrss.model.dao.WantedEmployeeDao;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployee;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
+import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
 import com.hrsolutionsystem.hrss.model.mapper.WantedEmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

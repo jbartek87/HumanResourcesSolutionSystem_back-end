@@ -1,11 +1,9 @@
 package com.hrsolutionsystem.hrss.model.service;
 
 import com.hrsolutionsystem.hrss.exception.wantedEmployee.WantedEmployeeNotFoundException;
-import com.hrsolutionsystem.hrss.model.domain.RecruitmentStatus;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployee;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class WantedEmployeeServiceTestSuite {
 
     @After
     public void dbCleaner() {
-        //service.wantedEmployeeDeleteById(id);
+        service.wantedEmployeeDeleteById(id);
     }
 
     @Test
@@ -37,17 +35,16 @@ public class WantedEmployeeServiceTestSuite {
         skillset.add("skill_2");
         skillset.add("skill_3");
 
-//        WantedEmployeeDto dto = new WantedEmployeeDto();
-//        dto.setId(6L);
-//        dto.setRecruitmentStarts(LocalDate.now());
-//        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-//        dto.setRequirements(skillset);
-//        dto.setStatus(RecruitmentStatus.ACTIVE);
+        WantedEmployeeDto dto = new WantedEmployeeDto();
+        dto.setRecruitmentStarts(LocalDate.now());
+        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
+        dto.setRequirements(skillset);
+        dto.setStatus(RecruitmentStatus.ACTIVE);
 
-        //WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        //id = new Long(employee.getId());
+        WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
+        id = new Long(employee.getId());
 
-        //assertNotNull(service.wantedEmployeeFindById(id));
+        assertNotNull(service.wantedEmployeeFindById(id));
     }
 
     @Test
@@ -57,19 +54,18 @@ public class WantedEmployeeServiceTestSuite {
         skillset.add("skill_2");
         skillset.add("skill_3");
 
-//        WantedEmployeeDto dto = new WantedEmployeeDto();
-//        dto.setId(7L);
-//        dto.setRecruitmentStarts(LocalDate.now());
-//        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-//        dto.setRequirements(skillset);
-//        dto.setStatus(RecruitmentStatus.ACTIVE);
+        WantedEmployeeDto dto = new WantedEmployeeDto();
+        dto.setRecruitmentStarts(LocalDate.now());
+        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
+        dto.setRequirements(skillset);
+        dto.setStatus(RecruitmentStatus.ACTIVE);
 
-        //WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        //id = new Long(employee.getId());
+        WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
+        id = new Long(employee.getId());
 
-        //List<WantedEmployeeDto> list = service.wantedEmployeeGetList();
+        List<WantedEmployeeDto> list = service.wantedEmployeeGetList();
 
-        //assertEquals(1, list.size());
+        assertEquals(1, list.size());
     }
 
     @Test
@@ -79,26 +75,25 @@ public class WantedEmployeeServiceTestSuite {
         skillset.add("skill_2");
         skillset.add("skill_3");
 
-//        WantedEmployeeDto dto = new WantedEmployeeDto();
-//        dto.setId(7L);
-//        dto.setRecruitmentStarts(LocalDate.now());
-//        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-//        dto.setRequirements(skillset);
-//        dto.setStatus(RecruitmentStatus.ACTIVE);
+        WantedEmployeeDto dto = new WantedEmployeeDto();
+        dto.setRecruitmentStarts(LocalDate.now());
+        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
+        dto.setRequirements(skillset);
+        dto.setStatus(RecruitmentStatus.ACTIVE);
 
-        //WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        //id = new Long(employee.getId());
+        WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
+        id = new Long(employee.getId());
 
-//        WantedEmployeeDto updateDto = new WantedEmployeeDto();
-//        updateDto.setId(id);
-//        updateDto.setRecruitmentStarts(LocalDate.now());
-//        updateDto.setRecruitmentEnds(LocalDate.now().plusDays(13));
-//        updateDto.setRequirements(skillset);
-//        updateDto.setStatus(RecruitmentStatus.EXPIRED);
+        WantedEmployeeDto updateDto = new WantedEmployeeDto();
+        updateDto.setId(id);
+        updateDto.setRecruitmentStarts(LocalDate.now());
+        updateDto.setRecruitmentEnds(LocalDate.now().plusDays(13));
+        updateDto.setRequirements(skillset);
+        updateDto.setStatus(RecruitmentStatus.EXPIRED);
 
-        //service.wantedEmployeeUpdate(updateDto);
+        service.wantedEmployeeUpdate(updateDto);
 
-        //assertNotEquals(service.wantedEmployeeFindById(id), dto);
+        assertNotEquals(service.wantedEmployeeFindById(id), dto);
     }
 
     @Test
@@ -108,25 +103,24 @@ public class WantedEmployeeServiceTestSuite {
         skillset.add("skill_2");
         skillset.add("skill_3");
 
-//        WantedEmployeeDto dto = new WantedEmployeeDto();
-//        dto.setId(7L);
-//        dto.setRecruitmentStarts(LocalDate.now());
-//        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-//        dto.setRequirements(skillset);
-//        dto.setStatus(RecruitmentStatus.ACTIVE);
+        WantedEmployeeDto dto = new WantedEmployeeDto();
+        dto.setRecruitmentStarts(LocalDate.now());
+        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
+        dto.setRequirements(skillset);
+        dto.setStatus(RecruitmentStatus.ACTIVE);
 
-        //WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        //id = new Long(employee.getId());
+        WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
+        id = new Long(employee.getId());
 
-        //long count = service.wantedEmployeeCount();
+        long count = service.wantedEmployeeCount();
 
-        //assertEquals(count, 1L);
+        assertEquals(count, 1L);
     }
 
     @Test(expected = WantedEmployeeNotFoundException.class)
     public void notFoundExceptionTest() {
-        Long testId  = 1231132323235656L;
-
-        assertNull(service.wantedEmployeeFindById(testId));
+        Long testId  = 1231132323L;                         //
+                                                            // comment/delete dbCleaner() to run this test properly
+        assertNull(service.wantedEmployeeFindById(testId)); //
     }
 }

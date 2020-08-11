@@ -1,8 +1,8 @@
 package com.hrsolutionsystem.hrss.model.mapper;
 
-import com.hrsolutionsystem.hrss.model.domain.RecruitmentStatus;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployee;
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
+import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
+import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
 import org.junit.Test;
 
 import java.time.LocalDate;

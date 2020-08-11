@@ -1,6 +1,6 @@
 package com.hrsolutionsystem.hrss.model.dao;
 
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployee;
+import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
