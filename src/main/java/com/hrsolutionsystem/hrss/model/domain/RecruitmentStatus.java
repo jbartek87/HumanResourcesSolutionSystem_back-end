@@ -1,4 +1,6 @@
 package com.hrsolutionsystem.hrss.model.domain;
 
-public class RecruitmentStatus {
+public enum RecruitmentStatus {
+    ACTIVE,
+    EXPIRED
 }
