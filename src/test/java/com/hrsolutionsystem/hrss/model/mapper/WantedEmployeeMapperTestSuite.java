@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 public class WantedEmployeeMapperTestSuite {
     private WantedEmployeeMapper mapper = new WantedEmployeeMapperImpl();
 
-
     @Test
     public void toMapTest() {
         ArrayList<String> skillset = new ArrayList<>();
@@ -93,4 +92,5 @@ public class WantedEmployeeMapperTestSuite {
 
         assertEquals(wantedEmployeeList2, wantedEmployeeDtoList2);
     }
+
 }
