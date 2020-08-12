@@ -16,11 +16,11 @@ import java.util.ArrayList;
 @Builder
 @Table
 @Entity(name="WANTED_EMPLOYEES")
-public class WantedEmployees {
+public class WantedEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "WANTED_EMPLOYEES_ID")
-    private long id;
+    @Column(name = "ID")
+    private Long id;
 
     @Lob
     @Column(name = "REQUIREMENTS")
@@ -37,6 +37,6 @@ public class WantedEmployees {
 
     @Column(name = "STATUS")
     @NotNull
+    @Enumerated
     private RecruitmentStatus status;
-
 }
