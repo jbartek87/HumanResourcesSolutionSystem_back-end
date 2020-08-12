@@ -1,5 +1,6 @@
-package com.hrsolutionsystem.hrss.model.domain;
+package com.hrsolutionsystem.hrss.model.domain.entity;
 
+import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,6 @@ public class WantedEmployee {
 
     @Column(name = "STATUS")
     @NotNull
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private RecruitmentStatus status;
 }

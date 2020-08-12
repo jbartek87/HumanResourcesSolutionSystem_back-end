@@ -1,13 +1,17 @@
-package com.hrsolutionsystem.hrss.model.domain;
+package com.hrsolutionsystem.hrss.model.domain.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder
+@ToString
 public class WantedEmployeeDto {
     private Long id;
     private ArrayList<String> requirements;

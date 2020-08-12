@@ -1,6 +1,6 @@
 package com.hrsolutionsystem.hrss.model.controller;
 
-import com.hrsolutionsystem.hrss.model.domain.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
 import com.hrsolutionsystem.hrss.model.service.WantedEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
