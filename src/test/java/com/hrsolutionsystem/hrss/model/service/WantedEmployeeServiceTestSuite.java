@@ -117,10 +117,10 @@ public class WantedEmployeeServiceTestSuite {
         assertEquals(count, 1L);
     }
 
-    @Test(expected = WantedEmployeeNotFoundException.class)
-    public void notFoundExceptionTest() {
-        Long testId  = 1231132323L;                         //
-                                                            // comment/delete dbCleaner() to run this test properly
-        assertNull(service.wantedEmployeeFindById(testId)); //
-    }
+//    @Test(expected = WantedEmployeeNotFoundException.class)
+//    public void notFoundExceptionTest() {
+//        Long testId  = 1231132323L;
+//
+//        assertNull(service.wantedEmployeeFindById(testId));
+//    }
 }
