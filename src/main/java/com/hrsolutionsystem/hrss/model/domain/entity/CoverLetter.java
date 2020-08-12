@@ -1,4 +1,4 @@
-package com.hrsolutionsystem.hrss.model.domain;
+package com.hrsolutionsystem.hrss.model.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
