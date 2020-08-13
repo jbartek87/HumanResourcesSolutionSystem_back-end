@@ -1,5 +1,6 @@
 package com.hrsolutionsystem.hrss.model.domain.entity;
 
+import com.hrsolutionsystem.hrss.model.domain.enums.CvStatus;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,46 +14,42 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name="Recruiters")
-public class Recruiters {
+@Table(name="CV_DETAILS")
+public class CvDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name="LOGIN")
+    @Column(name="APPLYING_POSITION")
     @NotNull
-    private String login;
+    private String applyingPosition;
 
-    @Column(name = "PASSWORD")
-    @NotNull
-    private String password;
-
-    @Column(name = "FIRST_NAME")
+    @Column(name ="FIRST_NAME")
     @NotNull
     private String firstName;
 
-    @Column(name = "LAST_NAME")
+    @Column(name ="LAST_NAME")
     @NotNull
     private String lastName;
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name ="PHONE_NUMBER")
     @NotNull
     private long phoneNumber;
 
-    @Column(name = "email")
+    @Column(name ="EMAIL")
     @NotNull
     private String email;
 
-    @Column(name = "COMPANIES_ID")
+    @Column(name ="CV_FILE_ID")
     @NotNull
-    private long companiesId;
+    private long cvFileId;
 
-    @Column(name = "CV_DETAILS_ID")
+    @Column(name ="COVER_LETTER_ID")
     @NotNull
-    private long cvDetailsId;
+    private long coverLetterId;
 
-    @Column(name = "INTERVIEWS_ID")
+    @Column(name ="STATUS")
     @NotNull
-    private long interviewsId;
+    private CvStatus status;
 
 }
