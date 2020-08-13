@@ -1,4 +1,4 @@
-package com.hrsolutionsystem.hrss.exception.wantedEmployee;
+package com.hrsolutionsystem.hrss.exception.recruiter;
 
 public class RecruitersNotFoundException extends RuntimeException{
     public RecruitersNotFoundException(Long id){

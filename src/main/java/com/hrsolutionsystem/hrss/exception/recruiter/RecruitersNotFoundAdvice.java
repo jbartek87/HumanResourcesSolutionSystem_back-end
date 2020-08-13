@@ -1,4 +1,4 @@
-package com.hrsolutionsystem.hrss.exception.wantedEmployee;
+package com.hrsolutionsystem.hrss.exception.recruiter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
