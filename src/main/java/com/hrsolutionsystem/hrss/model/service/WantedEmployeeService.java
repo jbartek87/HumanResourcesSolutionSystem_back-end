@@ -5,6 +5,8 @@ import com.hrsolutionsystem.hrss.model.dao.WantedEmployeeDao;
 import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
 import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
 import com.hrsolutionsystem.hrss.model.mapper.WantedEmployeeMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class WantedEmployeeService {
     private WantedEmployeeDao repository;
     private WantedEmployeeMapper mapper;
+    private Logger logger = LoggerFactory.getLogger(WantedEmployeeService.class);
 
     @Autowired
     public WantedEmployeeService(WantedEmployeeDao repository, WantedEmployeeMapper mapper) {
@@ -36,12 +39,17 @@ public class WantedEmployeeService {
     }
 
     public void wantedEmployeeDeleteById(final Long id) {
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+            logger.info("DELETED Wanted Employee with ID: " + id);
+        } catch (Exception e) {
+            logger.info("NOT FOUND Wanted Employee with ID: " + id);
+            throw notFoundException(id);
+        }
     }
 
     public WantedEmployeeDto wantedEmployeeSave(final WantedEmployeeDto wantedEmployeeDto) {
-        WantedEmployee wantedEmployee = mapper.toMap(wantedEmployeeDto);
-        mapper.toDto(repository.save(wantedEmployee));
+        WantedEmployee wantedEmployee = repository.save(mapper.toMap(wantedEmployeeDto));
 
         return mapper.toDto(wantedEmployee);
     }
