@@ -1,6 +1,6 @@
 package com.hrsolutionsystem.hrss.model.domain.enums;
 
-public enum Location {
+public enum InterviewLocation {
     REMOTE,
     IN_OFFICE
 }
