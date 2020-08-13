@@ -40,11 +40,12 @@ public class CvDetailsService {
     }
 
     public void deleteById(final Long id) {
-        if (repository.findById(id).isPresent()) {
+        try {
             repository.deleteById(id);
             logger.info("DELETED CvDetails with ID: " + id);
-        } else {
-            notFound(id);
+        } catch (Exception e) {
+            logger.warn("NOT FOUND CvDetails with ID: " + id);
+            throw notFound(id);
         }
     }
 }
