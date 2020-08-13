@@ -50,6 +50,7 @@ public class CvDetails {
 
     @Column(name ="STATUS")
     @NotNull
+    @Enumerated(EnumType.STRING)
     private CvStatus status;
 
 }
