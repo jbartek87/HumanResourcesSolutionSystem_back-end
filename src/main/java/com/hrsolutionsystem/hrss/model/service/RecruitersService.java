@@ -1,6 +1,6 @@
 package com.hrsolutionsystem.hrss.model.service;
 
-import com.hrsolutionsystem.hrss.exception.wantedEmployee.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
 import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Recruiters;
