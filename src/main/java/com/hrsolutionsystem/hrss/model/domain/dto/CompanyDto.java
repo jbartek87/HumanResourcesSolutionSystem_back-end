@@ -1,8 +1,12 @@
-package com.hrsolutionsystem.hrss.model.domain;
+package com.hrsolutionsystem.hrss.model.domain.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CompanyDto {
     private Long id;
     private String name;
