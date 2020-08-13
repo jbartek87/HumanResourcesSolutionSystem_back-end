@@ -1,9 +1,16 @@
 package com.hrsolutionsystem.hrss.model.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.hrsolutionsystem.hrss.jsonSerializer.LocalDateAdapter;
+import com.hrsolutionsystem.hrss.model.dao.WantedEmployeeDao;
+import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
 import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
 import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
 import com.hrsolutionsystem.hrss.model.service.WantedEmployeeService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
@@ -27,33 +34,47 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(WantedEmployeeController.class)
 public class WantedEmployeeControllerTestSuite {
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
     private WantedEmployeeService service;
 
-    private String url = "/v1/wantedEmployee";
+    private WantedEmployeeDto dto;
+    private ArrayList<String> skillSet;
+    private Gson gson;
+    private String url = "/v1/wantedEmployee/";
 
-    @Test
-    public void getByIdTest() throws Exception{
-        ArrayList<String> skillset = new ArrayList<>();
-        skillset.add("skill_1");
-        skillset.add("skill_2");
-        skillset.add("skill_3");
+    @Before
+    public void init() {
+        skillSet = new ArrayList<>();
+        skillSet.add("skill_1");
+        skillSet.add("skill_2");
+        skillSet.add("skill_3");
 
-        WantedEmployeeDto dto = new WantedEmployeeDto();
+        dto = new WantedEmployeeDto();
+        dto.setId(1L);
         dto.setRecruitmentStarts(LocalDate.of(2020, 11, 8));
         dto.setRecruitmentEnds(LocalDate.of(2020, 11, 8));
-        dto.setRequirements(skillset);
+        dto.setRequirements(skillSet);
         dto.setStatus(RecruitmentStatus.ACTIVE);
+    }
 
+    @Before
+    public void gsonBuilder() {
+        gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+                .create();
+    }
+
+    @Test
+    public void getByIdTest() throws Exception {
         when(service.wantedEmployeeFindById(1L)).thenReturn(dto);
 
-        mvc.perform(get(url + "/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get(url + dto.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
-                .andExpect(jsonPath("$.requirements", is(skillset)))
-                .andExpect(jsonPath("$.recruitmentStarts", is("2020-11-08")))
-                .andExpect(jsonPath("$.recruitmentEnds", is("2020-11-08")))
+                .andExpect(jsonPath("$.requirements", is(skillSet)))
+                .andExpect(jsonPath("$.recruitmentStarts", is(dto.getRecruitmentStarts().toString())))
+                .andExpect(jsonPath("$.recruitmentEnds", is(dto.getRecruitmentEnds().toString())))
                 .andExpect(jsonPath("$.status", is("ACTIVE")));
     }
 
@@ -63,72 +84,49 @@ public class WantedEmployeeControllerTestSuite {
 
         when(service.wantedEmployeeGetList()).thenReturn(list);
 
-        mvc.perform(get(url + "/list").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get(url + "list").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     public void deleteByIdTest() throws Exception {
-        ArrayList<String> skillset = new ArrayList<>();
-        skillset.add("skill_1");
-        skillset.add("skill_2");
-        skillset.add("skill_3");
-
-        WantedEmployeeDto dto = new WantedEmployeeDto();
-        dto.setRecruitmentStarts(LocalDate.now());
-        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-        dto.setRequirements(skillset);
-        dto.setStatus(RecruitmentStatus.ACTIVE);
-
         when(service.wantedEmployeeFindById(1L)).thenReturn(dto);
 
-        mvc.perform(delete(url + "/1").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(delete(url + "1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
 
     @Test
     public void saveTest() throws Exception {
-        ArrayList<String> skillset = new ArrayList<>();
-        skillset.add("skill_1");
-        skillset.add("skill_2");
-        skillset.add("skill_3");
+        when(service.wantedEmployeeSave(ArgumentMatchers.any())).thenReturn(dto);
 
-        WantedEmployeeDto dto = new WantedEmployeeDto();
-        dto.setRecruitmentStarts(LocalDate.now());
-        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-        dto.setRequirements(skillset);
-        dto.setStatus(RecruitmentStatus.ACTIVE);
-
-        when(service.wantedEmployeeSave(dto)).thenReturn(dto);
-
-        Gson gson = new Gson();
         String gsonContent = gson.toJson(dto);
 
-        mvc.perform(post(url + "/create").contentType(MediaType.APPLICATION_JSON)
-            .content(gsonContent));
-
+        mvc.perform(post(url + "create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(gsonContent))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.recruitmentStarts", is(dto.getRecruitmentStarts().toString())))
+                    .andExpect(jsonPath("$.recruitmentEnds", is(dto.getRecruitmentEnds().toString())))
+                    .andExpect(jsonPath("$.requirements", is(skillSet)))
+                    .andExpect(jsonPath("$.status", is("ACTIVE")));
     }
 
     @Test
     public void updateTest() throws Exception {
-        ArrayList<String> skillset = new ArrayList<>();
-        skillset.add("skill_1");
-        skillset.add("skill_2");
-        skillset.add("skill_3");
-
-        WantedEmployeeDto dto = new WantedEmployeeDto();
-        dto.setRecruitmentStarts(LocalDate.now());
-        dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
-        dto.setRequirements(skillset);
-        dto.setStatus(RecruitmentStatus.ACTIVE);
-
         when(service.wantedEmployeeUpdate(ArgumentMatchers.any())).thenReturn(dto);
-        Gson gson = new Gson();
         String jsonContent = gson.toJson(dto);
 
-        mvc.perform(put(url + "/update").contentType(MediaType.APPLICATION_JSON)
-            .characterEncoding("UTF-8")
-            .content(jsonContent));
+        mvc.perform(put(url + "update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.recruitmentStarts", is(dto.getRecruitmentStarts().toString())))
+                .andExpect(jsonPath("$.recruitmentEnds", is(dto.getRecruitmentEnds().toString())))
+                .andExpect(jsonPath("$.requirements", is(skillSet)))
+                .andExpect(jsonPath("$.status", is("ACTIVE")));
     }
 }
