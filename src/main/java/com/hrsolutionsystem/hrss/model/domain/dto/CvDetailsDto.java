@@ -1,13 +1,7 @@
 package com.hrsolutionsystem.hrss.model.domain.dto;
 
 import com.hrsolutionsystem.hrss.model.domain.enums.CvStatus;
-import com.sun.istack.NotNull;
 import lombok.*;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,13 +10,13 @@ import javax.persistence.Id;
 @Builder
 @ToString
 public class CvDetailsDto {
-    private long id;
+    private Long id;
     private String applyingPosition;
     private String firstName;
     private String lastName;
-    private long phoneNumber;
+    private Long phoneNumber;
     private String email;
-    private long cvFileId;
-    private long coverLetterId;
+    private Long cvFileId;
+    private Long coverLetterId;
     private CvStatus status;
 }

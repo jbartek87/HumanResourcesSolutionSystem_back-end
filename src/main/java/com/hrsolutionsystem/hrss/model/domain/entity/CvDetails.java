@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class CvDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name="APPLYING_POSITION")
     @NotNull
@@ -34,7 +34,7 @@ public class CvDetails {
 
     @Column(name ="PHONE_NUMBER")
     @NotNull
-    private long phoneNumber;
+    private Long phoneNumber;
 
     @Column(name ="EMAIL")
     @NotNull
@@ -42,11 +42,11 @@ public class CvDetails {
 
     @Column(name ="CV_FILE_ID")
     @NotNull
-    private long cvFileId;
+    private Long cvFileId;
 
     @Column(name ="COVER_LETTER_ID")
     @NotNull
-    private long coverLetterId;
+    private Long coverLetterId;
 
     @Column(name ="STATUS")
     @NotNull
