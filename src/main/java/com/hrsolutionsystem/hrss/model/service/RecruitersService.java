@@ -26,27 +26,27 @@ public class RecruitersService {
         return new RecruitersNotFoundException(id);
     }
 
-    private RecruitersDto recruitersDtoFindById(final Long id){
+    public RecruitersDto findById(final Long id){
         Optional<Recruiters> recruiter = repository.findById(id);
         return mapper.toDto(recruiter.orElseThrow(()-> notFoundException(id)));
     }
 
-    private List<RecruitersDto> recruitersGetList(){
+    public List<RecruitersDto> recruitersGetList(){
         return mapper.toList(repository.findAll());
     }
 
-    private void recruitersDeleteByID(final Long id){
+    public void deleteByID(final Long id){
         repository.deleteById(id);
     }
 
-    private RecruitersDto recruitersSave(final RecruitersDto recruitersDto){
+    public RecruitersDto save(final RecruitersDto recruitersDto){
         Recruiters recruiter = mapper.toMap(recruitersDto);
         mapper.toDto(repository.save(recruiter));
 
         return mapper.toDto(recruiter);
     }
 
-    private RecruitersDto recruitersUpdate(final RecruitersDto recruitersDto){
+    public RecruitersDto update(final RecruitersDto recruitersDto){
         Long id = recruitersDto.getId();
         Recruiters recruiter = repository.findById(id).orElseThrow(()->notFoundException(id));
         return mapper.toDto(repository.save(mapper.toMap(recruitersDto)));
