@@ -31,7 +31,7 @@ public class InterviewService {
     }
 
     public InterviewDto findById(final Long id){
-        Optional<Interview> interview = repository.findById();
+        Optional<Interview> interview = repository.findById(id);
         return mapper.toDto(interview.orElseThrow(()->notFound(id)));
     }
 
