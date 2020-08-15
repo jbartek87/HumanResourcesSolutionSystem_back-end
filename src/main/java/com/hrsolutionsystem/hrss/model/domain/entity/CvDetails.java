@@ -53,4 +53,19 @@ public class CvDetails {
     @Enumerated(EnumType.STRING)
     private CvStatus status;
 
+    @ManyToOne
+    private Recruiters recruiter;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private CvFile file;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private CoverLetter letter;
+
 }

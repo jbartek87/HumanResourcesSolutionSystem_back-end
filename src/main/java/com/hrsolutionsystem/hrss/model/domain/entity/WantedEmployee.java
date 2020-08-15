@@ -40,4 +40,7 @@ public class WantedEmployee {
     @NotNull
     @Enumerated(EnumType.STRING)
     private RecruitmentStatus status;
+
+    @ManyToOne
+    private Company company;
 }

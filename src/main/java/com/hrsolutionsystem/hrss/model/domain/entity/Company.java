@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,4 +33,18 @@ public class Company {
 
     @Column(name = "WANTED_EMPLOYEE_ID", nullable = false)
     private Long wantedEmployeeId;
+
+    @OneToMany(
+            targetEntity = WantedEmployee.class,
+            mappedBy = "company",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<WantedEmployee> wantedEmployeeList = new ArrayList<>();
+
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "recruiters"
+    )
+    List<Recruiters> recruiters = new ArrayList<>();
 }
