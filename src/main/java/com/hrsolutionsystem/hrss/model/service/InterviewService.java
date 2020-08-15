@@ -3,7 +3,6 @@ package com.hrsolutionsystem.hrss.model.service;
 import com.hrsolutionsystem.hrss.exception.interview.InterviewNotFoundException;
 import com.hrsolutionsystem.hrss.model.dao.InterviewDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.InterviewDto;
-import com.hrsolutionsystem.hrss.model.domain.entity.CvDetails;
 import com.hrsolutionsystem.hrss.model.domain.entity.Interview;
 import com.hrsolutionsystem.hrss.model.mapper.InterviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
