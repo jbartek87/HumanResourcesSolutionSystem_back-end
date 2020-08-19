@@ -28,11 +28,11 @@ public class WantedEmployee {
     @NotNull
     private ArrayList<String> requirements;
 
-    @Column(name="RECRUITMENTS_STARTS")
+    @Column(name="RECRUITMENT_STARTS")
     @NotNull
     private LocalDate recruitmentStarts;
 
-    @Column(name = "RECRUITMENTS_ENDS")
+    @Column(name = "RECRUITMENT_ENDS")
     @NotNull
     private LocalDate recruitmentEnds;
 
@@ -42,5 +42,6 @@ public class WantedEmployee {
     private RecruitmentStatus status;
 
     @ManyToOne
+    @JoinColumn(name="COMPANY_ID")
     private Company company;
 }

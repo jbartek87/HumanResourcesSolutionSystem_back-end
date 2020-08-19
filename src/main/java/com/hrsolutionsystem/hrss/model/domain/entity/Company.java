@@ -28,11 +28,6 @@ public class Company {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @Column(name = "RECRUITERS_ID", nullable = false)
-    private Long recruitersId;
-
-    @Column(name = "WANTED_EMPLOYEE_ID", nullable = false)
-    private Long wantedEmployeeId;
 
     @OneToMany(
             targetEntity = WantedEmployee.class,
@@ -42,9 +37,9 @@ public class Company {
     )
     private List<WantedEmployee> wantedEmployeeList = new ArrayList<>();
 
-    @ManyToMany(
-            cascade = CascadeType.ALL,
-            mappedBy = "recruiters"
-    )
-    List<Recruiters> recruiters = new ArrayList<>();
+//    @ManyToMany(
+//            cascade = CascadeType.ALL,
+//            mappedBy = "recruiters"
+//    )
+//    List<Recruiters> recruiters = new ArrayList<>();
 }

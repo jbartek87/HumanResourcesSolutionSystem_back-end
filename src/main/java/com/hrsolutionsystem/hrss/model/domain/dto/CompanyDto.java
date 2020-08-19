@@ -2,6 +2,8 @@ package com.hrsolutionsystem.hrss.model.domain.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,5 +15,5 @@ public class CompanyDto {
     private Long nip;
     private String address;
     private Long recruitersId;
-    private Long wantedEmployeeId;
+    private List<WantedEmployeeDto> wantedEmployeeDtoList;
 }

@@ -40,20 +40,13 @@ public class CvDetails {
     @NotNull
     private String email;
 
-    @Column(name ="CV_FILE_ID")
-    @NotNull
-    private Long cvFileId;
-
-    @Column(name ="COVER_LETTER_ID")
-    @NotNull
-    private Long coverLetterId;
-
     @Column(name ="STATUS")
     @NotNull
     @Enumerated(EnumType.STRING)
     private CvStatus status;
 
     @ManyToOne
+    @JoinColumn(name="RECRUITER_ID")
     private Recruiters recruiter;
 
     @OneToOne(
