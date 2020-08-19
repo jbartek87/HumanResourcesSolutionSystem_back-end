@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +20,7 @@ import javax.persistence.*;
 public class Recruiters {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "RECRUITER_ID")
     private long id;
 
     @Column(name="LOGIN")
@@ -54,5 +58,31 @@ public class Recruiters {
     @Column(name = "INTERVIEWS_ID")
     @NotNull
     private long interviewsId;
+
+    @OneToMany(
+            targetEntity = Interview.class,
+            mappedBy = "recruiter",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+
+    List<Interview> interviewList = new ArrayList<>();
+
+    @OneToMany(
+            targetEntity = CvDetails.class,
+            mappedBy = "recruiter",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    List<CvDetails> cvDetailsList = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="JOIN_RECRUITER_COMPANY",
+            joinColumns = {@JoinColumn(name="COMPANIES_ID", referencedColumnName = "COMPANY_ID")},
+            inverseJoinColumns = {@JoinColumn(name="RECRUITER_ID", referencedColumnName = "RECRUITER_ID")}
+
+    )
+    private List<Company> companies = new ArrayList<>();
 
 }

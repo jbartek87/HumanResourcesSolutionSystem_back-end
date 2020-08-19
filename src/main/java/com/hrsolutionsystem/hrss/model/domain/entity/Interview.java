@@ -27,4 +27,7 @@ public class Interview {
     private LocalDate interviewDate;
     @Column(name = "LOCATION")
     private InterviewLocation location;
+
+    @ManyToOne
+    private Recruiters recruiter;
 }
