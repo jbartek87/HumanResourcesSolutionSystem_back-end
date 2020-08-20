@@ -1,8 +1,6 @@
 package com.hrsolutionsystem.hrss.model.domain.dto;
 
-import com.hrsolutionsystem.hrss.model.domain.entity.Company;
-import com.hrsolutionsystem.hrss.model.domain.entity.CvDetails;
-import com.hrsolutionsystem.hrss.model.domain.entity.Interview;
+
 import lombok.*;
 
 import java.util.List;
@@ -22,7 +20,4 @@ public class RecruitersDto {
     private String lastName;
     private Long phoneNumber;
     private String email;
-    private List<CompanyDto> companyDtoList;
-    private List<CvDetailsDto> cvDetailsDtoList;
-    private List<InterviewDto> interviewDtoList;
 }

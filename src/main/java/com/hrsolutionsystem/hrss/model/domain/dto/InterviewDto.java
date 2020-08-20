@@ -3,7 +3,6 @@ package com.hrsolutionsystem.hrss.model.domain.dto;
 import com.hrsolutionsystem.hrss.model.domain.enums.InterviewLocation;
 import lombok.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +13,7 @@ import java.util.List;
 public class InterviewDto {
     private Long id;
     private Long recruiterId;
+    private Long cvDetailsId;
     private LocalDate interviewDate;
     private InterviewLocation location;
 }

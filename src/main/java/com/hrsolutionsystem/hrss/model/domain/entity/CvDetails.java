@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,14 +50,22 @@ public class CvDetails {
     @JoinColumn(name="RECRUITER_ID")
     private Recruiters recruiter;
 
+    @OneToMany(
+            targetEntity = Interview.class,
+            mappedBy = "cvDetails",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
+    )
+    private List<Interview> interviews;
+
     @OneToOne(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.EAGER
     )
     private CvFile file;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.EAGER
     )
     private CoverLetter letter;

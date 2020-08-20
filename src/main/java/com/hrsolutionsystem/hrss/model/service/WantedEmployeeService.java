@@ -1,6 +1,8 @@
 package com.hrsolutionsystem.hrss.model.service;
 
+import com.hrsolutionsystem.hrss.exception.company.CompanyNotFoundException;
 import com.hrsolutionsystem.hrss.exception.wantedEmployee.WantedEmployeeNotFoundException;
+import com.hrsolutionsystem.hrss.model.dao.CompanyDao;
 import com.hrsolutionsystem.hrss.model.dao.WantedEmployeeDao;
 import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
 import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
@@ -16,17 +18,23 @@ import java.util.Optional;
 @Service
 public class WantedEmployeeService {
     private WantedEmployeeDao repository;
+    private CompanyDao companyDao;
     private WantedEmployeeMapper mapper;
     private Logger logger = LoggerFactory.getLogger(WantedEmployeeService.class);
 
     @Autowired
-    public WantedEmployeeService(WantedEmployeeDao repository, WantedEmployeeMapper mapper) {
+    public WantedEmployeeService(WantedEmployeeDao repository, CompanyDao companyDao, WantedEmployeeMapper mapper) {
         this.repository = repository;
+        this.companyDao = companyDao;
         this.mapper = mapper;
     }
 
     private WantedEmployeeNotFoundException notFoundException(Long id) {
         return new WantedEmployeeNotFoundException(id);
+    }
+
+    private CompanyNotFoundException companyNotFoundException(Long id) {
+        return new CompanyNotFoundException(id);
     }
 
     public WantedEmployeeDto wantedEmployeeFindById(final Long id) {
@@ -49,6 +57,8 @@ public class WantedEmployeeService {
     }
 
     public WantedEmployeeDto wantedEmployeeSave(final WantedEmployeeDto wantedEmployeeDto) {
+        Long companyId = wantedEmployeeDto.getCompanyId();
+        companyDao.findById(companyId).orElseThrow(() -> companyNotFoundException(companyId));
         WantedEmployee wantedEmployee = repository.save(mapper.toMap(wantedEmployeeDto));
 
         return mapper.toDto(wantedEmployee);
@@ -56,7 +66,9 @@ public class WantedEmployeeService {
 
     public WantedEmployeeDto wantedEmployeeUpdate(final WantedEmployeeDto wantedEmployeeDto) {
         Long id = wantedEmployeeDto.getId();
-        WantedEmployee wantedEmployee = repository.findById(id).orElseThrow(() -> notFoundException(id));
+        Long companyId = wantedEmployeeDto.getCompanyId();
+        repository.findById(id).orElseThrow(() -> notFoundException(id));
+        companyDao.findById(companyId).orElseThrow(() -> companyNotFoundException(companyId));
 
         return mapper.toDto(repository.save(mapper.toMap(wantedEmployeeDto)));
     }

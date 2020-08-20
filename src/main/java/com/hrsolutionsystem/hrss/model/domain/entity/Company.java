@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -38,7 +37,6 @@ public class Company {
     private List<WantedEmployee> wantedEmployeeList;
 
     @ManyToMany(
-            cascade = CascadeType.ALL,
             mappedBy = "companies"
     )
     private List<Recruiters> recruiters;

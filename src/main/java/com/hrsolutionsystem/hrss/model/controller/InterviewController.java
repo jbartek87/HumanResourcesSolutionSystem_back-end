@@ -17,7 +17,7 @@ public class InterviewController {
     }
 
     @PostMapping(value = "/create")
-    public InterviewDto save(InterviewDto interviewDto) {
+    public InterviewDto save(@RequestBody InterviewDto interviewDto) {
         return service.save(interviewDto);
     }
 

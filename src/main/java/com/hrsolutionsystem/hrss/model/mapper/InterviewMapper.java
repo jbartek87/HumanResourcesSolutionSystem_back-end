@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@Mapper(componentModel = "spring", uses = {RecruitersMapper.class})
+@Mapper(componentModel = "spring")
 public interface InterviewMapper {
 
     @Mappings({
-            @Mapping(source = "recruiter.id", target = "recruiterId")
+            @Mapping(source = "recruiter.id", target = "recruiterId"),
+            @Mapping(source = "cvDetails.id", target = "cvDetailsId")
     })
     InterviewDto toDto(Interview interview);
 

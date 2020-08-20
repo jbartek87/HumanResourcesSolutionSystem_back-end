@@ -61,7 +61,10 @@ public class Recruiters {
     )
     private List<CvDetails> cvDetailsList;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     private List<Company> companies;
 
 }

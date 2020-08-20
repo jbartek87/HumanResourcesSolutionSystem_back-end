@@ -30,4 +30,8 @@ public class Interview {
     @ManyToOne
     @JoinColumn(name="RECRUITER_ID")
     private Recruiters recruiter;
+
+    @ManyToOne
+    @JoinColumn(name = "CANDIDATE_ID")
+    private CvDetails cvDetails;
 }

@@ -16,6 +16,7 @@ public class CvDetailsDto {
     private String lastName;
     private Long phoneNumber;
     private String email;
+    private Long recruiterId;
     private Long cvFileId;
     private Long coverLetterId;
     private CvStatus status;
