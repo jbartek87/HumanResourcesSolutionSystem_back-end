@@ -35,11 +35,11 @@ public class Company {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<WantedEmployee> wantedEmployeeList = new ArrayList<>();
+    private List<WantedEmployee> wantedEmployeeList;
 
-//    @ManyToMany(
-//            cascade = CascadeType.ALL,
-//            mappedBy = "recruiters"
-//    )
-//    List<Recruiters> recruiters = new ArrayList<>();
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "companies"
+    )
+    private List<Recruiters> recruiters;
 }

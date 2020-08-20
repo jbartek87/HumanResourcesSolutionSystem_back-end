@@ -20,13 +20,11 @@ public class Interview {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "RECRUITERS_ID")
-    private Long recruitersId;
-
     @Column(name = "INTERVIEW_DATE")
     private LocalDate interviewDate;
 
     @Column(name = "LOCATION")
+    @Enumerated(EnumType.STRING)
     private InterviewLocation location;
 
     @ManyToOne

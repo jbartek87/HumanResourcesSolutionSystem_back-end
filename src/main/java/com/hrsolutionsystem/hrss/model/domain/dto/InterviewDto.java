@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 public class InterviewDto {
     private Long id;
-    private List<RecruitersDto> recruitersDtoList;
+    private Long recruiterId;
     private LocalDate interviewDate;
     private InterviewLocation location;
 }

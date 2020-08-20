@@ -14,6 +14,6 @@ public class CompanyDto {
     private String name;
     private Long nip;
     private String address;
-    private Long recruitersId;
+    private List<RecruitersDto>  recruitersDtoList;
     private List<WantedEmployeeDto> wantedEmployeeDtoList;
 }

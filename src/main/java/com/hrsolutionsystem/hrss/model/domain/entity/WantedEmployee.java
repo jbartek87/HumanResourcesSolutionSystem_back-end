@@ -23,6 +23,9 @@ public class WantedEmployee {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "JOB_POSITION")
+    private String job;
+
     @Lob
     @Column(name = "REQUIREMENTS")
     @NotNull
