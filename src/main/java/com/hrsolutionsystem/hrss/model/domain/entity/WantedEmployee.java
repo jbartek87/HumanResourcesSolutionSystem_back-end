@@ -23,16 +23,19 @@ public class WantedEmployee {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "JOB_POSITION")
+    private String job;
+
     @Lob
     @Column(name = "REQUIREMENTS")
     @NotNull
     private ArrayList<String> requirements;
 
-    @Column(name="RECRUITMENTS_STARTS")
+    @Column(name="RECRUITMENT_STARTS")
     @NotNull
     private LocalDate recruitmentStarts;
 
-    @Column(name = "RECRUITMENTS_ENDS")
+    @Column(name = "RECRUITMENT_ENDS")
     @NotNull
     private LocalDate recruitmentEnds;
 
@@ -40,4 +43,8 @@ public class WantedEmployee {
     @NotNull
     @Enumerated(EnumType.STRING)
     private RecruitmentStatus status;
+
+    @ManyToOne
+    @JoinColumn(name="COMPANY_ID")
+    private Company company;
 }

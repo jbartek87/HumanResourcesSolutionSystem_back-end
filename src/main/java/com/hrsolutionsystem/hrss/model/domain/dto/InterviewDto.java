@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @ToString
 public class InterviewDto {
     private Long id;
-    private Long recruitersId;
+    private Long recruiterId;
     private Long cvDetailsId;
     private LocalDate interviewDate;
     private InterviewLocation location;

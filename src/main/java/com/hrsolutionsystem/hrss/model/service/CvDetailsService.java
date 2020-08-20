@@ -1,7 +1,13 @@
 package com.hrsolutionsystem.hrss.model.service;
 
+import com.hrsolutionsystem.hrss.exception.coverLetter.CoverLetterNotFoundException;
 import com.hrsolutionsystem.hrss.exception.cvDetails.CvDetailsNotFoundException;
+import com.hrsolutionsystem.hrss.exception.cvFile.CvFileNotFoundException;
+import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.model.dao.CoverLetterDao;
 import com.hrsolutionsystem.hrss.model.dao.CvDetailsDao;
+import com.hrsolutionsystem.hrss.model.dao.CvFileDao;
+import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.CvDetailsDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.CvDetails;
 import com.hrsolutionsystem.hrss.model.mapper.CvDetailsMapper;
@@ -16,19 +22,44 @@ import java.util.Optional;
 public class CvDetailsService {
     private CvDetailsMapper mapper;
     private CvDetailsDao repository;
+    private CvFileDao cvFileDao;
+    private CoverLetterDao coverLetterDao;
+    private RecruitersDao recruitersDao;
     private Logger logger = LoggerFactory.getLogger(CvDetailsService.class);
 
     @Autowired
-    public CvDetailsService(CvDetailsMapper mapper, CvDetailsDao repository) {
+    public CvDetailsService(CvDetailsMapper mapper, CvDetailsDao repository, CvFileDao cvFileDao, CoverLetterDao coverLetterDao, RecruitersDao recruitersDao) {
         this.mapper = mapper;
         this.repository = repository;
+        this.cvFileDao = cvFileDao;
+        this.coverLetterDao = coverLetterDao;
+        this.recruitersDao = recruitersDao;
     }
 
     private CvDetailsNotFoundException notFound(Long id) {
         return new CvDetailsNotFoundException(id);
     }
 
+    private CvFileNotFoundException cvFileNotFoundException(Long id) {
+        return new CvFileNotFoundException(id);
+    }
+
+    private CoverLetterNotFoundException coverLetterNotFoundException(Long id) {
+        return new CoverLetterNotFoundException(id);
+    }
+
+    private RecruitersNotFoundException recruitersNotFoundException(Long id) {
+        return new RecruitersNotFoundException(id);
+    }
+
     public CvDetailsDto save(final CvDetailsDto cvDetailsDto) {
+        Long cvFileId = cvDetailsDto.getCvFileId();
+        Long coverLetterId = cvDetailsDto.getCoverLetterId();
+        Long recruiterId = cvDetailsDto.getRecruiterId();
+
+        cvFileDao.findById(cvFileId).orElseThrow(() -> cvFileNotFoundException(cvFileId));
+        coverLetterDao.findById(coverLetterId).orElseThrow(() -> coverLetterNotFoundException(coverLetterId));
+        recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));
         CvDetails cvDetails = repository.save(mapper.toMap(cvDetailsDto));
 
         return mapper.toDto(cvDetails);

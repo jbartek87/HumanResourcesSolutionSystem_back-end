@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,9 +27,17 @@ public class Company {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @Column(name = "RECRUITERS_ID", nullable = false)
-    private Long recruitersId;
 
-    @Column(name = "WANTED_EMPLOYEE_ID", nullable = false)
-    private Long wantedEmployeeId;
+    @OneToMany(
+            targetEntity = WantedEmployee.class,
+            mappedBy = "company",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<WantedEmployee> wantedEmployeeList;
+
+    @ManyToMany(
+            mappedBy = "companies"
+    )
+    private List<Recruiters> recruiters;
 }

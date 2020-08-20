@@ -1,7 +1,11 @@
 package com.hrsolutionsystem.hrss.model.service;
 
+import com.hrsolutionsystem.hrss.exception.cvDetails.CvDetailsNotFoundException;
 import com.hrsolutionsystem.hrss.exception.interview.InterviewNotFoundException;
+import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.model.dao.CvDetailsDao;
 import com.hrsolutionsystem.hrss.model.dao.InterviewDao;
+import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.InterviewDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Interview;
 import com.hrsolutionsystem.hrss.model.mapper.InterviewMapper;
@@ -14,18 +18,34 @@ import java.util.Optional;
 public class InterviewService {
     private InterviewMapper mapper;
     private InterviewDao repository;
+    private RecruitersDao recruitersDao;
+    private CvDetailsDao cvDetailsDao;
 
     @Autowired
-    public InterviewService(InterviewMapper mapper, InterviewDao repository) {
+    public InterviewService(InterviewMapper mapper, InterviewDao repository, RecruitersDao recruitersDao, CvDetailsDao cvDetailsDao) {
         this.mapper = mapper;
         this.repository = repository;
+        this.recruitersDao = recruitersDao;
+        this.cvDetailsDao = cvDetailsDao;
     }
 
     private InterviewNotFoundException notFound(Long id){
         return new InterviewNotFoundException(id);
     }
 
+    private RecruitersNotFoundException recruitersNotFoundException(Long id) {
+        return new RecruitersNotFoundException(id);
+    }
+
+    private CvDetailsNotFoundException cvDetailsNotFoundException(Long id) {
+        return new CvDetailsNotFoundException(id);
+    }
+
     public InterviewDto save(final InterviewDto interviewDto){
+        Long cvDetailsId = interviewDto.getCvDetailsId();
+        Long recruiterId = interviewDto.getRecruiterId();
+        cvDetailsDao.findById(cvDetailsId).orElseThrow(() -> cvDetailsNotFoundException(cvDetailsId));
+        recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));
         Interview interview = repository.save(mapper.toMap(interviewDto));
         return mapper.toDto(interview);
     }

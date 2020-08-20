@@ -14,8 +14,10 @@ import java.util.ArrayList;
 @ToString
 public class WantedEmployeeDto {
     private Long id;
+    private String job;
     private ArrayList<String> requirements;
     private LocalDate recruitmentStarts;
     private LocalDate recruitmentEnds;
     private RecruitmentStatus status;
+    private Long companyId;
 }

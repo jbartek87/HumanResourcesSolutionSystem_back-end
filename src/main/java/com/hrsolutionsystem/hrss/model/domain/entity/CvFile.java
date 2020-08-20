@@ -19,13 +19,13 @@ public class CvFile {
     private Long id;
 
     @Lob
-    @Column(name = "FILE", nullable = false)
+    @Column(name = "FILE")
     private byte[] file;
 
-    @Column(name = "FILE_NAME", nullable = false)
+    @Column(name = "FILE_NAME")
     private String fileName;
 
-    @Column(name = "FILE_TYPE", nullable = false)
+    @Column(name = "FILE_TYPE")
     private String fileType;
 
     @Column(name = "DATE")

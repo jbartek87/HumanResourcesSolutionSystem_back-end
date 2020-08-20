@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,8 @@ import javax.persistence.*;
 public class Recruiters {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "ID")
+    private Long id;
 
     @Column(name="LOGIN")
     @NotNull
@@ -37,22 +39,32 @@ public class Recruiters {
 
     @Column(name = "PHONE_NUMBER")
     @NotNull
-    private long phoneNumber;
+    private Long phoneNumber;
 
     @Column(name = "email")
     @NotNull
     private String email;
 
-    @Column(name = "COMPANIES_ID")
-    @NotNull
-    private long companiesId;
+    @OneToMany(
+            targetEntity = Interview.class,
+            mappedBy = "recruiter",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Interview> interviewList;
 
-    @Column(name = "CV_DETAILS_ID")
-    @NotNull
-    private long cvDetailsId;
+    @OneToMany(
+            targetEntity = CvDetails.class,
+            mappedBy = "recruiter",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<CvDetails> cvDetailsList;
 
-    @Column(name = "INTERVIEWS_ID")
-    @NotNull
-    private long interviewsId;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    private List<Company> companies;
 
 }
