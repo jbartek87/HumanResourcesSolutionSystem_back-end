@@ -9,6 +9,8 @@ import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.InterviewDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Interview;
 import com.hrsolutionsystem.hrss.model.mapper.InterviewMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class InterviewService {
     private InterviewDao repository;
     private RecruitersDao recruitersDao;
     private CvDetailsDao cvDetailsDao;
+    private Logger logger = LoggerFactory.getLogger(InterviewService.class);
 
     @Autowired
     public InterviewService(InterviewMapper mapper, InterviewDao repository, RecruitersDao recruitersDao, CvDetailsDao cvDetailsDao) {
@@ -44,9 +47,12 @@ public class InterviewService {
     public InterviewDto save(final InterviewDto interviewDto){
         Long cvDetailsId = interviewDto.getCvDetailsId();
         Long recruiterId = interviewDto.getRecruiterId();
+
         cvDetailsDao.findById(cvDetailsId).orElseThrow(() -> cvDetailsNotFoundException(cvDetailsId));
         recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));
         Interview interview = repository.save(mapper.toMap(interviewDto));
+        logger.info("CREATED Interview with ID: " + interview.getId());
+
         return mapper.toDto(interview);
     }
 
@@ -55,10 +61,11 @@ public class InterviewService {
         return mapper.toDto(interview.orElseThrow(()->notFound(id)));
     }
 
-    public void deleteById(final Long id){
-        try{
+    public void deleteById(final Long id) {
+        try {
             repository.deleteById(id);
-        }catch (Exception e){
+            logger.info("DELETED Interview with ID: " + id);
+        } catch (Exception e) {
             throw notFound(id);
         }
     }
