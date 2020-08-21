@@ -24,7 +24,7 @@ public class RecruiterController {
         return service.save(recruitersDto);
     }
 
-    @PostMapping(value = "/update")
+    @PutMapping(value = "/update")
     public RecruitersDto updateRecruiter(@RequestBody RecruitersDto recruitersDto){
         return service.update(recruitersDto);
     }
