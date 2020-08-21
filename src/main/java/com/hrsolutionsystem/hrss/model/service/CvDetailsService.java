@@ -57,10 +57,11 @@ public class CvDetailsService {
         Long coverLetterId = cvDetailsDto.getCoverLetterId();
         Long recruiterId = cvDetailsDto.getRecruiterId();
 
+        recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));
         cvFileDao.findById(cvFileId).orElseThrow(() -> cvFileNotFoundException(cvFileId));
         coverLetterDao.findById(coverLetterId).orElseThrow(() -> coverLetterNotFoundException(coverLetterId));
-        recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));
         CvDetails cvDetails = repository.save(mapper.toMap(cvDetailsDto));
+        logger.info("CREATED CvDetails with ID: " + cvDetails.getId());
 
         return mapper.toDto(cvDetails);
     }
@@ -75,7 +76,6 @@ public class CvDetailsService {
             repository.deleteById(id);
             logger.info("DELETED CvDetails with ID: " + id);
         } catch (Exception e) {
-            logger.warn("NOT FOUND CvDetails with ID: " + id);
             throw notFound(id);
         }
     }
