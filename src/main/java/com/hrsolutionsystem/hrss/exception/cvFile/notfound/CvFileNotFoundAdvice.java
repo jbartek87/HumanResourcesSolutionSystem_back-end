@@ -1,4 +1,4 @@
-package com.hrsolutionsystem.hrss.exception.cvFile;
+package com.hrsolutionsystem.hrss.exception.cvFile.notfound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

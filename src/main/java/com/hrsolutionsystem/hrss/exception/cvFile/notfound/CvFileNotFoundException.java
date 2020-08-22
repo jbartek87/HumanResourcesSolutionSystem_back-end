@@ -1,4 +1,4 @@
-package com.hrsolutionsystem.hrss.exception.cvFile;
+package com.hrsolutionsystem.hrss.exception.cvFile.notfound;
 
 public class CvFileNotFoundException extends RuntimeException {
     public CvFileNotFoundException(Long id) {
