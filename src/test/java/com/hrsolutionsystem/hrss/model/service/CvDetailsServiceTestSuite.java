@@ -2,7 +2,9 @@
 //
 //import com.hrsolutionsystem.hrss.exception.cvDetails.CvDetailsNotFoundException;
 //import com.hrsolutionsystem.hrss.model.domain.dto.CvDetailsDto;
+//import com.hrsolutionsystem.hrss.model.domain.entity.CoverLetter;
 //import com.hrsolutionsystem.hrss.model.domain.entity.CvDetails;
+//import com.hrsolutionsystem.hrss.model.domain.entity.CvFile;
 //import com.hrsolutionsystem.hrss.model.domain.enums.CvStatus;
 //import org.junit.After;
 //import org.junit.Assert;
@@ -30,10 +32,14 @@
 //
 //    @Test
 //    public void saveTest() {
+//        CvFile cvFile = new CvFile();
+//        cvFile.setId(1L);
+//        CoverLetter coverLetter = new CoverLetter();
+//        coverLetter.setId(1L);
 //        CvDetailsDto dto = new CvDetailsDto();
 //        dto.setApplyingPosition("Junior Developer Life Matters");
-//        dto.setCoverLetterId(1L);
-//        dto.setCvFileId(1L);
+//        dto.setCoverLetterId(coverLetter.getId());
+//        dto.setCvFileId(cvFile.getId());
 //        dto.setEmail("kokoszka@o2.pl");
 //        dto.setFirstName("Kokosza");
 //        dto.setLastName("Pojoak");
@@ -44,27 +50,27 @@
 //
 //        id = details.getId();
 //
-//        assertNotNull(details);
+////        assertNotNull(details);
 //    }
 //
-//    @Test
-//    public void findById() {
-//        CvDetailsDto dto = new CvDetailsDto();
-//        dto.setApplyingPosition("Junior Developer Life Matters");
-//        dto.setCoverLetterId(1L);
-//        dto.setCvFileId(1L);
-//        dto.setEmail("kokoszka@o2.pl");
-//        dto.setFirstName("Kokosza");
-//        dto.setLastName("Pojoak");
-//        dto.setPhoneNumber(123123123L);
-//        dto.setStatus(CvStatus.HIRED);
-//
-//        CvDetailsDto details = service.save(dto);
-//
-//        id = details.getId();
-//
-//        assertNotNull(service.findById(id));
-//    }
+////    @Test
+////    public void findById() {
+////        CvDetailsDto dto = new CvDetailsDto();
+////        dto.setApplyingPosition("Junior Developer Life Matters");
+////        dto.setCoverLetterId(1L);
+////        dto.setCvFileId(1L);
+////        dto.setEmail("kokoszka@o2.pl");
+////        dto.setFirstName("Kokosza");
+////        dto.setLastName("Pojoak");
+////        dto.setPhoneNumber(123123123L);
+////        dto.setStatus(CvStatus.HIRED);
+////
+////        CvDetailsDto details = service.save(dto);
+////
+////        id = details.getId();
+////
+////        assertNotNull(service.findById(id));
+////    }
 //
 ////    @Test(expected = CvDetailsNotFoundException.class)
 ////    public void notFound() {
