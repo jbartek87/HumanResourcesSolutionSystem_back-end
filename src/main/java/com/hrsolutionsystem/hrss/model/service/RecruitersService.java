@@ -5,6 +5,8 @@ import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Recruiters;
 import com.hrsolutionsystem.hrss.model.mapper.RecruitersMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class RecruitersService {
     private RecruitersDao repository;
     private RecruitersMapper mapper;
+    private Logger logger = LoggerFactory.getLogger(RecruitersService.class);
 
     @Autowired
     public RecruitersService(RecruitersDao repository, RecruitersMapper mapper) {
@@ -38,20 +41,26 @@ public class RecruitersService {
     }
 
     public void deleteByID(final Long id){
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+            logger.info("DELETED Recruiter with ID: " + id);
+        } catch (Exception e) {
+            throw notFoundException(id);
+        }
     }
 
     public RecruitersDto save(final RecruitersDto recruitersDto){
-        Recruiters recruiter = mapper.toMap(recruitersDto);
-        mapper.toDto(repository.save(recruiter));
+        Recruiters recruiter = repository.save(mapper.toMap(recruitersDto));
+        logger.info("CREATED Recruiter with ID: " + recruiter.getId());
 
         return mapper.toDto(recruiter);
     }
 
     public RecruitersDto update(final RecruitersDto recruitersDto){
-        Long id = recruitersDto.getId();
-        Recruiters recruiter = repository.findById(id).orElseThrow(()->notFoundException(id));
-        return mapper.toDto(repository.save(mapper.toMap(recruitersDto)));
+        repository.findById(recruitersDto.getId()).orElseThrow(()->notFoundException(recruitersDto.getId()));
+        Recruiters recruiter = repository.save(mapper.toMap(recruitersDto));
+        logger.info("UPDATED Recruiter with ID: " + recruiter.getId());
 
+        return mapper.toDto(recruiter);
     }
 }
