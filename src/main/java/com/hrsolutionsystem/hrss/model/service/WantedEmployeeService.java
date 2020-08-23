@@ -58,8 +58,10 @@ public class WantedEmployeeService {
 
     public WantedEmployeeDto wantedEmployeeSave(final WantedEmployeeDto wantedEmployeeDto) {
         Long companyId = wantedEmployeeDto.getCompanyId();
+
         companyDao.findById(companyId).orElseThrow(() -> companyNotFoundException(companyId));
         WantedEmployee wantedEmployee = repository.save(mapper.toMap(wantedEmployeeDto));
+        logger.info("CREATED Wanted Employee with ID: " + wantedEmployee.getId());
 
         return mapper.toDto(wantedEmployee);
     }
@@ -67,10 +69,13 @@ public class WantedEmployeeService {
     public WantedEmployeeDto wantedEmployeeUpdate(final WantedEmployeeDto wantedEmployeeDto) {
         Long id = wantedEmployeeDto.getId();
         Long companyId = wantedEmployeeDto.getCompanyId();
+
         repository.findById(id).orElseThrow(() -> notFoundException(id));
         companyDao.findById(companyId).orElseThrow(() -> companyNotFoundException(companyId));
+        WantedEmployee wantedEmployee = repository.save(mapper.toMap(wantedEmployeeDto));
+        logger.info("UPDATED Wanted Employee with ID: " + id);
 
-        return mapper.toDto(repository.save(mapper.toMap(wantedEmployeeDto)));
+        return mapper.toDto(wantedEmployee);
     }
 
     public Long wantedEmployeeCount() {
