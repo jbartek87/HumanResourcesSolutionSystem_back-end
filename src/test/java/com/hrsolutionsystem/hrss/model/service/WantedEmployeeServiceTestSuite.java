@@ -1,7 +1,9 @@
 package com.hrsolutionsystem.hrss.model.service;
 
 import com.hrsolutionsystem.hrss.exception.wantedEmployee.WantedEmployeeNotFoundException;
+import com.hrsolutionsystem.hrss.model.domain.dto.CompanyDto;
 import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.entity.Company;
 import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
 import org.junit.After;
 import org.junit.Before;
@@ -10,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,18 +22,19 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class WantedEmployeeServiceTestSuite {
     @Autowired
     private WantedEmployeeService service;
 
+    @Autowired
+    private CompanyService companyService;
+
     private Long id;
     private ArrayList<String> skillSet;
     private WantedEmployeeDto dto;
+    private CompanyDto companyDto;
 
-    @After
-    public void dbCleaner() {
-        service.wantedEmployeeDeleteById(id);
-    }
 
     @Before
     public void init() {
@@ -44,21 +48,34 @@ public class WantedEmployeeServiceTestSuite {
         dto.setRecruitmentEnds(LocalDate.now().plusDays(10));
         dto.setRequirements(skillSet);
         dto.setStatus(RecruitmentStatus.ACTIVE);
+        companyDto = new CompanyDto();
+        companyDto.setName("Coders");
+        companyDto.setAddress("Woronicza 17");
+        companyDto.setNip(444L);
+
     }
 
     @Test
     public void wantedEmployeeFindByIdTest() {
+        //Given
+        CompanyDto company = companyService.save(companyDto);
+        dto.setCompanyId(company.getId());
+        //When
         WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        id = new Long(employee.getId());
-
+        id = Long.valueOf(employee.getId());
+        //Then
         assertNotNull(service.wantedEmployeeFindById(id));
     }
 
     @Test
     public void wantedEmployeeListTest() {
+        //Given
+        CompanyDto company = companyService.save(companyDto);
+        dto.setCompanyId(company.getId());
+        //When
         WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        id = new Long(employee.getId());
-
+        id = employee.getId();
+        //Then
         List<WantedEmployeeDto> list = service.wantedEmployeeGetList();
 
         assertEquals(1, list.size());
@@ -66,9 +83,12 @@ public class WantedEmployeeServiceTestSuite {
 
     @Test
     public void wantedEmployeeUpdate() {
+        //Given
+        CompanyDto company = companyService.save(companyDto);
+        dto.setCompanyId(company.getId());
         WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
         id = new Long(employee.getId());
-
+        //When
         WantedEmployeeDto updateDto = new WantedEmployeeDto();
         updateDto.setId(id);
         updateDto.setRecruitmentStarts(LocalDate.now());
