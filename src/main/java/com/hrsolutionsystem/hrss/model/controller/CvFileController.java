@@ -23,7 +23,7 @@ public class CvFileController {
         this.service = service;
     }
 
-    @PostMapping(value = "/uploadFile", consumes = {"application/pdf", "application/msword"})
+    @PostMapping(value = "/uploadFile", consumes = "application/pdf")
     public void uploadFile(@RequestParam("file")MultipartFile file) {
         service.storeFile(file);
     }
