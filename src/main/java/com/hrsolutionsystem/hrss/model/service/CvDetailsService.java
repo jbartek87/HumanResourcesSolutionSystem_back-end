@@ -1,6 +1,6 @@
 package com.hrsolutionsystem.hrss.model.service;
 
-import com.hrsolutionsystem.hrss.exception.coverLetter.CoverLetterNotFoundException;
+import com.hrsolutionsystem.hrss.exception.coverLetter.notfound.CoverLetterNotFoundException;
 import com.hrsolutionsystem.hrss.exception.cvDetails.CvDetailsNotFoundException;
 import com.hrsolutionsystem.hrss.exception.cvFile.notfound.CvFileNotFoundException;
 import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
