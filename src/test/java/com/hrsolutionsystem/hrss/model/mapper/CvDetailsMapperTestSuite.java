@@ -42,7 +42,10 @@ public class CvDetailsMapperTestSuite {
     public void toDtoTest() {
         //Given
         byte[] mylist = new byte[]{1,2,3,4};
-        CvFile cvFile = new CvFile(1L, mylist, "ddd", "ddd");
+        CvFile cvFile = new CvFile();
+        cvFile.setFile(mylist);
+        cvFile.setFileName("ddd");
+        cvFile.setFileType("ddd");
         CoverLetter coverLetter = new CoverLetter(1L, mylist, "xxx", "fff");
         CvDetails map = new CvDetails();
         map.setId(1L);

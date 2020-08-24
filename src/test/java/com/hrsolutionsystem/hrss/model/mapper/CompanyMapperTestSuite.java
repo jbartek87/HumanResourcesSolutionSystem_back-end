@@ -40,8 +40,6 @@ public class CompanyMapperTestSuite {
         assertEquals(1234, nip);
         assertEquals("zielona", companyDto.getAddress());
         assertEquals("XxX", companyDto.getName());
-
-
     }
 
 }
