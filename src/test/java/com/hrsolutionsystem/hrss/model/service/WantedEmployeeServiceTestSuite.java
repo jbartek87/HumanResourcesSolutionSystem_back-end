@@ -87,10 +87,11 @@ public class WantedEmployeeServiceTestSuite {
         CompanyDto company = companyService.save(companyDto);
         dto.setCompanyId(company.getId());
         WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
-        id = new Long(employee.getId());
+        id = employee.getId();
         //When
         WantedEmployeeDto updateDto = new WantedEmployeeDto();
         updateDto.setId(id);
+        updateDto.setCompanyId(company.getId());
         updateDto.setRecruitmentStarts(LocalDate.now());
         updateDto.setRecruitmentEnds(LocalDate.now().plusDays(13));
         updateDto.setRequirements(skillSet);
