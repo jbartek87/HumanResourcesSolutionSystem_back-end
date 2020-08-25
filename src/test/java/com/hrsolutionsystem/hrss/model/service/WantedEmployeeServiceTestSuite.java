@@ -88,7 +88,6 @@ public class WantedEmployeeServiceTestSuite {
         dto.setCompanyId(company.getId());
         WantedEmployeeDto employee = service.wantedEmployeeSave(dto);
         id = employee.getId();
-        //When
         WantedEmployeeDto updateDto = new WantedEmployeeDto();
         updateDto.setId(id);
         updateDto.setCompanyId(company.getId());
@@ -96,9 +95,9 @@ public class WantedEmployeeServiceTestSuite {
         updateDto.setRecruitmentEnds(LocalDate.now().plusDays(13));
         updateDto.setRequirements(skillSet);
         updateDto.setStatus(RecruitmentStatus.EXPIRED);
-
+        //When
         service.wantedEmployeeUpdate(updateDto);
-
+        //Then
         assertNotEquals(service.wantedEmployeeFindById(id), dto);
     }
 
