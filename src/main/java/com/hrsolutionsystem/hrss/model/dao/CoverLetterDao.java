@@ -12,6 +12,5 @@ public interface CoverLetterDao extends CrudRepository<CoverLetter, Long> {
     @Override
     CoverLetter save(CoverLetter coverLetter);
 
-    @Override
-    Optional<CoverLetter> findById(Long id);
+    Optional<CoverLetter> findById(String id);
 }
