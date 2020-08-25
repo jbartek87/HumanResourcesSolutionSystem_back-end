@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CoverLetterDao extends CrudRepository<CoverLetter, Long> {
+public interface CoverLetterDao extends CrudRepository<CoverLetter, String> {
 
     @Override
     CoverLetter save(CoverLetter coverLetter);

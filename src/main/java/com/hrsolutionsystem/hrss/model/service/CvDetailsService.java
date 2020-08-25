@@ -40,11 +40,11 @@ public class CvDetailsService {
         return new CvDetailsNotFoundException(id);
     }
 
-    private CvFileNotFoundException cvFileNotFoundException(Long id) {
+    private CvFileNotFoundException cvFileNotFoundException(String id) {
         return new CvFileNotFoundException(id);
     }
 
-    private CoverLetterNotFoundException coverLetterNotFoundException(Long id) {
+    private CoverLetterNotFoundException coverLetterNotFoundException(String id) {
         return new CoverLetterNotFoundException(id);
     }
 
@@ -53,8 +53,8 @@ public class CvDetailsService {
     }
 
     public CvDetailsDto save(final CvDetailsDto cvDetailsDto) {
-        Long cvFileId = cvDetailsDto.getCvFileId();
-        Long coverLetterId = cvDetailsDto.getCoverLetterId();
+        String cvFileId = cvDetailsDto.getCvFileId();
+        String coverLetterId = cvDetailsDto.getCoverLetterId();
         Long recruiterId = cvDetailsDto.getRecruiterId();
 
         recruitersDao.findById(recruiterId).orElseThrow(() -> recruitersNotFoundException(recruiterId));

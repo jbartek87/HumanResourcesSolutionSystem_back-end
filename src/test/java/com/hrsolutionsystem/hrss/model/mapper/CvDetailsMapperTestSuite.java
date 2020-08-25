@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CvDetailsMapperTestSuite {
-    private CvDetailsMapper mapper = new CvDetailsMapperImpl();
+    private CvDetailsMapper mapper = new com.hrsolutionsystem.hrss.model.mapper.CvDetailsMapperImpl();
 
     @Test
     public void toMapTest() {
@@ -18,8 +18,8 @@ public class CvDetailsMapperTestSuite {
         CvDetailsDto dto = new CvDetailsDto();
         dto.setId(1L);
         dto.setApplyingPosition("Junior Developer Life Matters");
-        dto.setCoverLetterId(1L);
-        dto.setCvFileId(1L);
+        dto.setCoverLetterId("1L");
+        dto.setCvFileId("1L");
         dto.setEmail("kokoszka@o2.pl");
         dto.setFirstName("Kokosza");
         dto.setLastName("Pojoak");

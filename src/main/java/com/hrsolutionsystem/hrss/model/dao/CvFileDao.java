@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CvFileDao extends CrudRepository<CvFile, Long> {
+public interface CvFileDao extends CrudRepository<CvFile, String> {
 
     Optional<CvFile> findById(String id);
 
