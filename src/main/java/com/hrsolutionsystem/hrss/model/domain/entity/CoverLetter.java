@@ -3,6 +3,7 @@ package com.hrsolutionsystem.hrss.model.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,9 +15,9 @@ import java.time.LocalDate;
 @Table(name = "COVER_LETTER_FILES")
 public class CoverLetter {
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Lob
     @Column(name = "FILE")
