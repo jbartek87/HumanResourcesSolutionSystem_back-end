@@ -46,7 +46,10 @@ public class CvDetailsMapperTestSuite {
         cvFile.setFile(mylist);
         cvFile.setFileName("ddd");
         cvFile.setFileType("ddd");
-        CoverLetter coverLetter = new CoverLetter(1L, mylist, "xxx", "fff");
+        CoverLetter coverLetter = new CoverLetter();
+        coverLetter.setFile(mylist);
+        coverLetter.setFileName("xxx");
+        coverLetter.setFileType("fff");
         CvDetails map = new CvDetails();
         map.setId(1L);
         map.setApplyingPosition("Junior Developer Life Matters");
