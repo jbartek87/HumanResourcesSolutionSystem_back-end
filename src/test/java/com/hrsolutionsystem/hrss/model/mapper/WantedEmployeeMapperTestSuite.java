@@ -1,18 +1,18 @@
 package com.hrsolutionsystem.hrss.model.mapper;
 
-import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
-import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
 import com.hrsolutionsystem.hrss.model.domain.dto.WantedEmployeeDto;
+import com.hrsolutionsystem.hrss.model.domain.entity.WantedEmployee;
+import com.hrsolutionsystem.hrss.model.domain.enums.RecruitmentStatus;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class WantedEmployeeMapperTestSuite {
-    private WantedEmployeeMapper mapper = new WantedEmployeeMapperImpl();
+    private WantedEmployeeMapper mapper = new com.hrsolutionsystem.hrss.model.mapper.WantedEmployeeMapperImpl();
 
     @Test
     public void toMapTest() {

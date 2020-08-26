@@ -48,6 +48,6 @@ public class CoverLetterService {
     }
 
     public CoverLetter getFile(final String id) {
-        return repository.findById(id).orElseThrow(() -> new CoverLetterNotFoundException(Long.parseLong(id)));
+        return repository.findById(id).orElseThrow(() -> new CoverLetterNotFoundException(id));
     }
 }

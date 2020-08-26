@@ -31,14 +31,16 @@ public class CvDetailsControllerTestSuite {
 
     private CvDetailsDto dto;
     private String url = "/v1/cvDetails/";
+    private final static String CV_FILE_ID = "5044a5d4-b225-40e9-b93a-17f2b0a54fb1";
+    private final static String COVER_LETTER_FILE_ID = "a45cc045-3185-466e-9d91-a91329060820";
 
     @Before
     public void init() {
         dto = new CvDetailsDto();
         dto.setId(1L);
         dto.setApplyingPosition("Junior Developer Life Matters");
-        dto.setCoverLetterId(1L);
-        dto.setCvFileId(1L);
+        dto.setCoverLetterId(COVER_LETTER_FILE_ID);
+        dto.setCvFileId(CV_FILE_ID);
         dto.setEmail("kokoszka@o2.pl");
         dto.setFirstName("Kokosza");
         dto.setLastName("Pojoak");
@@ -58,8 +60,8 @@ public class CvDetailsControllerTestSuite {
                 .andExpect(jsonPath("$.lastName", is("Pojoak")))
                 .andExpect(jsonPath("$.phoneNumber", is(Integer.parseInt(dto.getPhoneNumber().toString()))))
                 .andExpect(jsonPath("$.email", is("kokoszka@o2.pl")))
-                .andExpect(jsonPath("$.cvFileId", is(1)))
-                .andExpect(jsonPath("$.coverLetterId", is(1)))
+                .andExpect(jsonPath("$.cvFileId", is(CV_FILE_ID)))
+                .andExpect(jsonPath("$.coverLetterId", is(COVER_LETTER_FILE_ID)))
                 .andExpect(jsonPath("$.status", is("HIRED")));
     }
 
@@ -89,8 +91,8 @@ public class CvDetailsControllerTestSuite {
                 .andExpect(jsonPath("$.lastName", is("Pojoak")))
                 .andExpect(jsonPath("$.phoneNumber", is(Integer.parseInt(dto.getPhoneNumber().toString()))))
                 .andExpect(jsonPath("$.email", is("kokoszka@o2.pl")))
-                .andExpect(jsonPath("$.cvFileId", is(1)))
-                .andExpect(jsonPath("$.coverLetterId", is(1)))
+                .andExpect(jsonPath("$.cvFileId", is(CV_FILE_ID)))
+                .andExpect(jsonPath("$.coverLetterId", is(COVER_LETTER_FILE_ID)))
                 .andExpect(jsonPath("$.status", is("HIRED")));
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class InterviewMapperTestSuite {
-    InterviewMapper mapper = new InterviewMapperImpl();
+    InterviewMapper mapper = new com.hrsolutionsystem.hrss.model.mapper.InterviewMapperImpl();
 
     @Test
     public void toMapTest(){

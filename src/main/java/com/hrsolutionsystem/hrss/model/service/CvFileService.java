@@ -49,6 +49,6 @@ public class CvFileService {
     }
 
     public CvFile getFile(final String id) {
-        return repository.findById(id).orElseThrow(() -> new CvFileNotFoundException(Long.parseLong(id)));
+        return repository.findById(id).orElseThrow(() -> new CvFileNotFoundException((id)));
     }
 }

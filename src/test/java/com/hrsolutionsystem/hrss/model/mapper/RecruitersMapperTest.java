@@ -10,10 +10,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RecruitersMapperTest {
-    RecruitersMapper mapper = new RecruitersMapperImpl();
+    RecruitersMapper mapper = new com.hrsolutionsystem.hrss.model.mapper.RecruitersMapperImpl();
     @Test
     public void testToDto(){
         //Given

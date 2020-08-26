@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CompanyMapperTestSuite {
-    CompanyMapper mapper = new CompanyMapperImpl();
+    CompanyMapper mapper = new com.hrsolutionsystem.hrss.model.mapper.CompanyMapperImpl();
     @Test
     public void testToMap(){
         //Given
