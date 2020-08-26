@@ -4,6 +4,7 @@ import com.hrsolutionsystem.hrss.model.domain.entity.CvFile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,4 +14,7 @@ public interface CvFileDao extends CrudRepository<CvFile, String> {
 
     @Override
     CvFile save(CvFile cvFile);
+
+    @Override
+    List<CvFile> findAll();
 }

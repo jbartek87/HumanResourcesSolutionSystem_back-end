@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,7 +27,6 @@ public class CvFileServiceTestSuite {
     private CvFileService service;
 
     private MultipartFile multipartFile;
-    private static final String CV_FILE_ID = "5044a5d4-b225-40e9-b93a-17f2b0a54fb1";
 
     @Before
     public void init() throws IOException {
@@ -49,11 +49,12 @@ public class CvFileServiceTestSuite {
     }
 
     @Test
-    public void getFileTest() {
-        CvFile cvFile;
+    public void getFileList(){
+        service.storeFile(multipartFile);
+        List<CvFile> testList;
+        testList = service.getFileList();
+        Assert.assertEquals(1, testList.size());
 
-        cvFile = service.getFile(CV_FILE_ID);
-
-        Assert.assertNotNull(cvFile);
     }
+
 }

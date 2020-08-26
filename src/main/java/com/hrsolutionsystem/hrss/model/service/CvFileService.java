@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class CvFileService {
@@ -51,4 +52,8 @@ public class CvFileService {
     public CvFile getFile(final String id) {
         return repository.findById(id).orElseThrow(() -> new CvFileNotFoundException((id)));
     }
-}
+
+    public List<CvFile> getFileList(){
+        return repository.findAll();
+    }
+ }
