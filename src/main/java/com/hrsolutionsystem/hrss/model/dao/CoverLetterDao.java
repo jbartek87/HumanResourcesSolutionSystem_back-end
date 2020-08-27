@@ -4,6 +4,7 @@ import com.hrsolutionsystem.hrss.model.domain.entity.CoverLetter;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,4 +14,7 @@ public interface CoverLetterDao extends CrudRepository<CoverLetter, String> {
     CoverLetter save(CoverLetter coverLetter);
 
     Optional<CoverLetter> findById(String id);
+
+    @Override
+    List<CoverLetter> findAll();
 }

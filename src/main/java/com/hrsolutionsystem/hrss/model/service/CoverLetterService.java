@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class CoverLetterService {
@@ -49,5 +50,9 @@ public class CoverLetterService {
 
     public CoverLetter getFile(final String id) {
         return repository.findById(id).orElseThrow(() -> new CoverLetterNotFoundException(id));
+    }
+
+    public List<CoverLetter> getList() {
+        return repository.findAll();
     }
 }
