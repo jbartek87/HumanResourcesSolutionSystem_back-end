@@ -1,6 +1,7 @@
 package com.hrsolutionsystem.hrss.model.service;
 
 import com.hrsolutionsystem.hrss.exception.cvDetails.CvDetailsNotFoundException;
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
 import com.hrsolutionsystem.hrss.model.domain.dto.CvDetailsDto;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.CoverLetter;
@@ -72,7 +73,7 @@ public class CvDetailsServiceTestSuite {
     }
 
     @Before
-    public void initRecruiter() {
+    public void initRecruiter() throws CannotPerformOperationException {
         recruitersDto = new RecruitersDto();
         recruitersDto.setLogin("Admin");
         recruitersDto.setPassword("12345");

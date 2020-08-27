@@ -1,12 +1,11 @@
 package com.hrsolutionsystem.hrss.model.service;
 
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
 import com.hrsolutionsystem.hrss.model.domain.dto.CvDetailsDto;
 import com.hrsolutionsystem.hrss.model.domain.dto.InterviewDto;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.CoverLetter;
-import com.hrsolutionsystem.hrss.model.domain.entity.CvDetails;
 import com.hrsolutionsystem.hrss.model.domain.entity.CvFile;
-import com.hrsolutionsystem.hrss.model.domain.entity.Interview;
 import com.hrsolutionsystem.hrss.model.domain.enums.CvStatus;
 import com.hrsolutionsystem.hrss.model.domain.enums.InterviewLocation;
 import org.junit.Assert;
@@ -77,7 +76,7 @@ public class InterviewServiceTestSuite {
         coverLetterId = coverLetterService.getList().get(0).getId();
     }
 
-    public void initRecruiter() {
+    public void initRecruiter() throws CannotPerformOperationException {
         recruitersDto = new RecruitersDto();
         recruitersDto.setLogin("Admin");
         recruitersDto.setPassword("12345");
@@ -90,7 +89,7 @@ public class InterviewServiceTestSuite {
     }
 
     @Before
-    public void initCvDet() throws IOException {
+    public void initCvDet() throws IOException, CannotPerformOperationException {
         initFile();
         initLetter();
         initRecruiter();
