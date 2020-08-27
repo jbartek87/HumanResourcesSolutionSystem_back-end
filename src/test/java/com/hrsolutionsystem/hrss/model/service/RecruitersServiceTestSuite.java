@@ -1,7 +1,7 @@
 package com.hrsolutionsystem.hrss.model.service;
 
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
-import com.hrsolutionsystem.hrss.model.domain.entity.Recruiters;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,7 +34,7 @@ public class RecruitersServiceTestSuite {
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() throws CannotPerformOperationException {
         //Given
         RecruitersDto recruitersDto = service.save(recruiter);
         long id = recruitersDto.getId();
@@ -51,7 +51,7 @@ public class RecruitersServiceTestSuite {
     }
 
     @Test
-    public void getListTest(){
+    public void getListTest() throws CannotPerformOperationException {
         //Given
         service.save(recruiter);
         service.save(recruiter);
@@ -62,7 +62,7 @@ public class RecruitersServiceTestSuite {
     }
 
     @Test
-    public void deleteByIdTest(){
+    public void deleteByIdTest() throws CannotPerformOperationException {
         //Given
         RecruitersDto firstRec = service.save(recruiter);
         RecruitersDto secondRec = service.save(recruiter);
@@ -73,7 +73,7 @@ public class RecruitersServiceTestSuite {
     }
 
     @Test
-    public void updateTest(){
+    public void updateTest() throws CannotPerformOperationException {
         //Given
         RecruitersDto recruitersDto = service.save(recruiter);
         long id = recruitersDto.getId();

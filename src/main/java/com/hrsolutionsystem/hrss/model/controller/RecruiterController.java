@@ -1,5 +1,6 @@
 package com.hrsolutionsystem.hrss.model.controller;
 
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.service.RecruitersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class RecruiterController {
     }
 
     @PostMapping(value = "/create")
-    public RecruitersDto saveRecruiter(@RequestBody RecruitersDto recruitersDto){
+    public RecruitersDto saveRecruiter(@RequestBody RecruitersDto recruitersDto) throws CannotPerformOperationException {
         return service.save(recruitersDto);
     }
 

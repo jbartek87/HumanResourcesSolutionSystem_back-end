@@ -1,10 +1,12 @@
 package com.hrsolutionsystem.hrss.model.service;
 
 import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
 import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Recruiters;
 import com.hrsolutionsystem.hrss.model.mapper.RecruitersMapper;
+import com.hrsolutionsystem.hrss.security.passwordHasher.PasswordHasher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,10 @@ public class RecruitersService {
         return new RecruitersNotFoundException(id);
     }
 
+    private String hashPassword (String password) throws CannotPerformOperationException {
+        return PasswordHasher.createHash(password);
+    }
+
     public RecruitersDto findById(final Long id){
         Optional<Recruiters> recruiter = repository.findById(id);
         return mapper.toDto(recruiter.orElseThrow(()-> notFoundException(id)));
@@ -49,7 +55,10 @@ public class RecruitersService {
         }
     }
 
-    public RecruitersDto save(final RecruitersDto recruitersDto){
+    public RecruitersDto save(RecruitersDto recruitersDto) throws CannotPerformOperationException {
+        String hashedPassword = hashPassword(recruitersDto.getPassword());
+        recruitersDto.setPassword(hashedPassword);
+
         Recruiters recruiter = repository.save(mapper.toMap(recruitersDto));
         logger.info("CREATED Recruiter with ID: " + recruiter.getId());
 
