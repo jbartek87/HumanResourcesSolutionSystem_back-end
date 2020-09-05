@@ -1,6 +1,8 @@
 package com.hrsolutionsystem.hrss.model.controller;
 
 import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.InvalidHashException;
+import com.hrsolutionsystem.hrss.model.domain.dto.RecruiterHolder;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.service.RecruitersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,16 @@ public class RecruiterController {
     @DeleteMapping(value = "/{id}")
     public void deleteRecruiterById(@PathVariable Long id){
         service.deleteByID(id);
+    }
+
+    @GetMapping(value = "/verifyUser")
+    public RecruitersDto verifyUser(@RequestBody RecruiterHolder recruiterHolder) throws CannotPerformOperationException, InvalidHashException {
+        return service.findByLoginAndPassword(recruiterHolder.getLogin(), recruiterHolder.getPassword());
+    }
+
+    @GetMapping(value = "/homePage")
+    public String homePage() {
+        return "HOME PAGE";
     }
 
 }

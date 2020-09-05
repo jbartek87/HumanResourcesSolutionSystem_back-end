@@ -1,7 +1,9 @@
 package com.hrsolutionsystem.hrss.model.service;
 
-import com.hrsolutionsystem.hrss.exception.recruiter.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.exception.recruiter.notFound.RecruitersNotFoundException;
+import com.hrsolutionsystem.hrss.exception.recruiter.unauthorized.RecruiterNotAuthorizedException;
 import com.hrsolutionsystem.hrss.exception.security.passwordHasher.CannotPerformOperationException;
+import com.hrsolutionsystem.hrss.exception.security.passwordHasher.InvalidHashException;
 import com.hrsolutionsystem.hrss.model.dao.RecruitersDao;
 import com.hrsolutionsystem.hrss.model.domain.dto.RecruitersDto;
 import com.hrsolutionsystem.hrss.model.domain.entity.Recruiters;
@@ -31,6 +33,10 @@ public class RecruitersService {
 
     private RecruitersNotFoundException notFoundException(Long id){
         return new RecruitersNotFoundException(id);
+    }
+
+    private RecruiterNotAuthorizedException notAuthorizedException() {
+        return new RecruiterNotAuthorizedException();
     }
 
     private String hashPassword (String password) throws CannotPerformOperationException {
@@ -71,5 +77,15 @@ public class RecruitersService {
         logger.info("UPDATED Recruiter with ID: " + recruiter.getId());
 
         return mapper.toDto(recruiter);
+    }
+
+    public RecruitersDto findByLoginAndPassword(String login, String password) throws InvalidHashException, CannotPerformOperationException {
+        Optional<Recruiters> recruiters = repository.findByLogin(login);
+
+        if (recruiters.isPresent() && PasswordHasher.verifyPassword(password, recruiters.get().getPassword())) {
+            return mapper.toDto(recruiters.orElseThrow(() -> notAuthorizedException()));
+        } else {
+            throw notAuthorizedException();
+        }
     }
 }
